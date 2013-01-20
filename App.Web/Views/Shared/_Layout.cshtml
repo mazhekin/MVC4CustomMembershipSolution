@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+    </head>
+</head>
+<body>
+    <header>
+        <section id="login">
+            @Html.Partial("_LoginPartial")
+        </section>
+    </header>
+    <div id="body">
+        @RenderBody()
+    </div>
+        
+</body>
+</html>

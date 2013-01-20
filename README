@@ -1,0 +1,4 @@
+MVC4CustomMembershipSolution
+============================
+
+ASP.NET MVC 4 project with custom implementation membership. Implementation ExtendedMembershipProvider.

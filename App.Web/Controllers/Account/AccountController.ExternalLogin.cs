@@ -82,7 +82,7 @@ namespace App.Web.Controllers
             if (ModelState.IsValid)
             {
                 var newUserProfile = new UserProfile { UserName = provider + "_" + providerUserId, DisplayName = model.UserName };
-                this.membershipService.Save(newUserProfile);
+                this.usersService.Save(newUserProfile);
 
                 OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, newUserProfile.UserName);
                 OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);

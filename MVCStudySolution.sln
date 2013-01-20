@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Web", "App.Web\App.Web.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Core", "App.Core\App.Core.csproj", "{E2209B95-DDDC-40E4-867B-1B276447202B}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "App.Database", "App.Database\App.Database.sqlproj", "{6C53360D-0BF2-4D1B-870E-20A3A8310EEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,12 @@ Global
 		{E2209B95-DDDC-40E4-867B-1B276447202B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2209B95-DDDC-40E4-867B-1B276447202B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2209B95-DDDC-40E4-867B-1B276447202B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C53360D-0BF2-4D1B-870E-20A3A8310EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C53360D-0BF2-4D1B-870E-20A3A8310EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C53360D-0BF2-4D1B-870E-20A3A8310EEE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6C53360D-0BF2-4D1B-870E-20A3A8310EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C53360D-0BF2-4D1B-870E-20A3A8310EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C53360D-0BF2-4D1B-870E-20A3A8310EEE}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

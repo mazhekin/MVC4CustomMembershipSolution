@@ -14,23 +14,19 @@ namespace App.Core
             get { return this.UserProfiles; }
         }
 
-        void IDatabaseContext.Save(UserProfile userProfile)
+        IDbSet<OAuthMembership> IDatabaseContext.OAuthMemberships
         {
-            try
-            {
-                if (userProfile.UserId == 0)
-                {
-                    this.Set<UserProfile>().Add(userProfile);
-                }
-                this.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                foreach (var err in ex.EntityValidationErrors)
-                {
-                    var test = err;
-                }
-            }
+            get { return this.OAuthMemberships; }
+        }
+                    
+        void IDatabaseContext.Add(UserProfile userProfile)
+        {
+            this.Set<UserProfile>().Add(userProfile);
+        }
+
+        void IDatabaseContext.SaveChanges()
+        {
+            this.SaveChanges();
         }
     }
 }

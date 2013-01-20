@@ -10,6 +10,10 @@ namespace App.Core
     {
         IDbSet<UserProfile> UserProfiles { get; }
 
-        void Save(UserProfile userProfile);
+        IDbSet<OAuthMembership> OAuthMemberships { get; }
+
+        void Add(UserProfile userProfile);
+
+        void SaveChanges();
     }
 }

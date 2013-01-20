@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,13 @@ namespace App.Web.Models.Membership
 {
     public class CustomMembershipProvider : ExtendedMembershipProvider
     {
+        private readonly IUsersService usersService;
+
+        public CustomMembershipProvider()
+        {
+            this.usersService = (IUsersService)MvcApplication.Container.Resolve(typeof(IUsersService), null);
+        }
+
         public override bool ConfirmAccount(string accountConfirmationToken)
         {
             throw new NotImplementedException();
@@ -222,8 +230,12 @@ namespace App.Web.Models.Membership
 
         public override int GetUserIdFromOAuth(string provider, string providerUserId)
         {
-            throw new NotImplementedException("its is mine");
+            var oAuthMembership = this.usersService.GetOAuthMembership(provider, providerUserId);
+            if (oAuthMembership != null)
+            {
+                return oAuthMembership.UserId;
+            }
+            return -1;
         }
-        //public virtual int GetUserIdFromOAuth(string provider, string providerUserId);
     }
 }

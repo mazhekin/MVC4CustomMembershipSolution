@@ -20,7 +20,7 @@ namespace App.Web
 
             container.RegisterType<IDatabaseContext, Entities>();
 
-            container.RegisterType<IMembershipService, MembershipService>();
+            container.RegisterType<IUsersService, UsersService>();
 
             ControllerBuilder.Current.SetControllerFactory(typeof(UnityControllerFactory));
         }

@@ -1,6 +1,5 @@
 ﻿using App.Core;
 using App.Core.Services;
-using App.Core.Web;
 using Microsoft.Web.WebPages.OAuth;
 using System;
 using System.Collections.Generic;
@@ -12,14 +11,13 @@ using WebMatrix.WebData;
 namespace App.Web.Controllers
 {
     [Authorize]
-    [InitializeMembership]
     public partial class AccountController : Controller
     {
-        private readonly IMembershipService membershipService;
+        private readonly IUsersService usersService;
 
-        public AccountController(IMembershipService membershipService)
+        public AccountController(IUsersService usersService)
         {
-            this.membershipService = membershipService;
+            this.usersService = usersService;
         }
 
         //

@@ -25,6 +25,7 @@ namespace App.Core
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<OAuthMembership> OAuthMemberships { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

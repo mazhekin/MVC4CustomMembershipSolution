@@ -5,7 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d06fe386de6142e29e6f75878b85e074" Name="Diagram1" >
-        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="8.4206882307402271" PointY="29.227730988165238" />
+        <EntityTypeShape EntityType="Model.OAuthMembership" Width="1.5" PointX="4.625" PointY="25.25" />
+        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="1.5" PointY="25.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

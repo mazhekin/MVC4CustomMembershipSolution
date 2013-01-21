@@ -82,10 +82,16 @@ namespace App.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var newUserProfile = new UserProfile { UserName = provider + "_" + providerUserId, DisplayName = model.UserName };
-                this.usersService.Save(newUserProfile);
+                var userName = provider + "_" + providerUserId;
+                var userProfile = this.usersService.GetUserProfile(userName);
+                if (userProfile == null)
+                {
+                    userProfile = new UserProfile { UserName = provider + "_" + providerUserId, DisplayName = model.UserName };
+                    this.usersService.Save(userProfile);
+                }
 
-                OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, newUserProfile.UserName);
+                OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, userProfile.UserName); 
+
                 OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
 
                 return RedirectToLocal(returnUrl);

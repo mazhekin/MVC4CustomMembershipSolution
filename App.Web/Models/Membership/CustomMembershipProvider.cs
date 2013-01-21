@@ -246,6 +246,22 @@ namespace App.Web.Models.Membership
 
         public override void CreateOrUpdateOAuthAccount(string provider, string providerUserId, string userName)
         {
+            var userProfile = this.usersService.GetUserProfile(userName);
+            if (userProfile == null)
+            {
+                throw new Exception("User profile was not created.");
+            }
+            this.usersService.SaveOAuthMembership(provider, providerUserId, userProfile.UserId);
+        }
+
+        public override string GetUserNameFromId(int userId)
+        {
+            var userProfile = this.usersService.GetUserProfile(userId);
+            if (userProfile != null)
+            {
+                return userProfile.UserName;
+            }
+            return null;
         }
 
         #endregion ExtendedMembershipProvider

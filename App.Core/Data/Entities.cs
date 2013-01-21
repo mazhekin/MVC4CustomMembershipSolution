@@ -24,6 +24,11 @@ namespace App.Core
             this.Set<UserProfile>().Add(userProfile);
         }
 
+        void IDatabaseContext.Add(OAuthMembership oAuthMembership)
+        {
+            this.Set<OAuthMembership>().Add(oAuthMembership);
+        }
+
         void IDatabaseContext.SaveChanges()
         {
             this.SaveChanges();

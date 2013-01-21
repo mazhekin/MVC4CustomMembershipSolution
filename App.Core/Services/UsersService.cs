@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 
 namespace App.Core.Services
 {
     public interface IUsersService
     {
+        UserProfile GetUserProfile(string userName);
+        UserProfile GetUserProfile(int userId);
         void Save(UserProfile userProfile);
 
         OAuthMembership GetOAuthMembership(string provider, string providerUserId);
+        void SaveOAuthMembership(string provider, string providerUserId, int userId);
+
     }
 
     public class UsersService : IUsersService
@@ -19,6 +24,16 @@ namespace App.Core.Services
         public UsersService(IDatabaseContext db)
         {
             this.db = db;
+        }
+
+        UserProfile IUsersService.GetUserProfile(string userName)
+        {
+            return this.db.UserProfiles.FirstOrDefault(x => x.UserName.Equals(userName));
+        }
+
+        UserProfile IUsersService.GetUserProfile(int userId)
+        {
+            return this.db.UserProfiles.FirstOrDefault(x => x.UserId.Equals(userId));
         }
 
         void IUsersService.Save(UserProfile userProfile)
@@ -33,6 +48,18 @@ namespace App.Core.Services
         OAuthMembership IUsersService.GetOAuthMembership(string provider, string providerUserId)
         {
             return this.db.OAuthMemberships.FirstOrDefault(x => x.Provider.Equals(provider) && x.ProviderUserId.Equals(providerUserId));
+        }
+
+        void IUsersService.SaveOAuthMembership(string provider, string providerUserId, int userId)
+        {
+            var oAuthMembership = this.db.OAuthMemberships.FirstOrDefault(x => x.Provider.Equals(provider) && x.ProviderUserId.Equals(providerUserId));
+            if (oAuthMembership == null)
+            {
+                oAuthMembership = new OAuthMembership { Provider = provider, ProviderUserId = providerUserId };
+                this.db.Add(oAuthMembership);
+            }
+            oAuthMembership.UserId = userId;
+            this.db.SaveChanges();
         }
     }
 }

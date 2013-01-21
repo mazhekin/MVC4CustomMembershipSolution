@@ -14,6 +14,8 @@ namespace App.Core
 
         void Add(UserProfile userProfile);
 
+        void Add(OAuthMembership oAuthMembership);
+
         void SaveChanges();
     }
 }

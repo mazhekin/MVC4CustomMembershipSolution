@@ -16,75 +16,7 @@ namespace App.Web.Models.Membership
             this.usersService = (IUsersService)MvcApplication.Container.Resolve(typeof(IUsersService), null);
         }
 
-        public override bool ConfirmAccount(string accountConfirmationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool ConfirmAccount(string userName, string accountConfirmationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string CreateAccount(string userName, string password, bool requireConfirmationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string CreateUserAndAccount(string userName, string password, bool requireConfirmation, IDictionary<string, object> values)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool DeleteAccount(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string GeneratePasswordResetToken(string userName, int tokenExpirationInMinutesFromNow)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override ICollection<OAuthAccountData> GetAccountsForUser(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override DateTime GetCreateDate(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override DateTime GetLastPasswordFailureDate(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override DateTime GetPasswordChangedDate(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override int GetPasswordFailuresSinceLastSuccess(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override int GetUserIdFromPasswordResetToken(string token)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool IsConfirmed(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool ResetPasswordWithToken(string token, string newPassword)
-        {
-            throw new NotImplementedException();
-        }
+        #region MembershipProvider
 
         public override string ApplicationName
         {
@@ -228,6 +160,80 @@ namespace App.Web.Models.Membership
             throw new NotImplementedException();
         }
 
+        #endregion MembershipProvider
+
+        #region ExtendedMembershipProvider
+
+        public override bool ConfirmAccount(string accountConfirmationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool ConfirmAccount(string userName, string accountConfirmationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string CreateAccount(string userName, string password, bool requireConfirmationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string CreateUserAndAccount(string userName, string password, bool requireConfirmation, IDictionary<string, object> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool DeleteAccount(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GeneratePasswordResetToken(string userName, int tokenExpirationInMinutesFromNow)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ICollection<OAuthAccountData> GetAccountsForUser(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DateTime GetCreateDate(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DateTime GetLastPasswordFailureDate(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DateTime GetPasswordChangedDate(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetPasswordFailuresSinceLastSuccess(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetUserIdFromPasswordResetToken(string token)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool IsConfirmed(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool ResetPasswordWithToken(string token, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
+
         public override int GetUserIdFromOAuth(string provider, string providerUserId)
         {
             var oAuthMembership = this.usersService.GetOAuthMembership(provider, providerUserId);
@@ -237,5 +243,11 @@ namespace App.Web.Models.Membership
             }
             return -1;
         }
+
+        public override void CreateOrUpdateOAuthAccount(string provider, string providerUserId, string userName)
+        {
+        }
+
+        #endregion ExtendedMembershipProvider
     }
 }

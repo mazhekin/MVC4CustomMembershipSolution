@@ -57,7 +57,8 @@ namespace App.Web.Controllers
             {
                 // User is new, ask for their desired membership name
                 string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+                var oAuthClientData = OAuthWebSecurity.GetOAuthClientData(result.Provider);
+                ViewBag.ProviderDisplayName = oAuthClientData.DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
                 return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
             }

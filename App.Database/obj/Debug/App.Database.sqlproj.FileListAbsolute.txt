@@ -1,0 +1,9 @@
+D:\Tests\MVCStudySolution\App.Database\bin\Debug\App.Database.dacpac
+D:\Tests\MVCStudySolution\App.Database\bin\Debug\App.Database.dll
+D:\Tests\MVCStudySolution\App.Database\bin\Debug\App.Database.pdb
+D:\Tests\MVCStudySolution\App.Database\obj\Debug\App.Database.dll
+D:\Tests\MVCStudySolution\App.Database\obj\Debug\App.Database.pdb
+D:\Tests\MVCStudySolution\App.Database\obj\Debug\Model.xml
+D:\Tests\MVCStudySolution\App.Database\obj\Debug\refactor.xml
+D:\Tests\MVCStudySolution\App.Database\obj\Debug\postdeploy.sql
+D:\Tests\MVCStudySolution\App.Database\obj\Debug\predeploy.sql

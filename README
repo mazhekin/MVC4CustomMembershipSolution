@@ -1,4 +1,4 @@
 MVC4CustomMembershipSolution
 ============================
 
-ASP.NET MVC 4 project with custom implementation membership. Implementation ExtendedMembershipProvider.
+ASP.NET MVC 4 project with custom implementation membership. Implementation ExtendedMembershipProvider for own database through Entity Framework 5.0.

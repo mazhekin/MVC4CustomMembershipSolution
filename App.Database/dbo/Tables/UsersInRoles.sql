@@ -10,14 +10,14 @@ PRIMARY KEY CLUSTERED
 
 GO
 
-ALTER TABLE [dbo].[UsersInRoles]  WITH CHECK ADD  CONSTRAINT [fk_RoleId] FOREIGN KEY([RoleId])
+ALTER TABLE [dbo].[UsersInRoles]  ADD  CONSTRAINT [fk_RoleId] FOREIGN KEY([RoleId])
 REFERENCES [dbo].[Roles] ([RoleId])
 GO
 
 ALTER TABLE [dbo].[UsersInRoles] CHECK CONSTRAINT [fk_RoleId]
 GO
 
-ALTER TABLE [dbo].[UsersInRoles]  WITH CHECK ADD  CONSTRAINT [fk_UserId] FOREIGN KEY([UserId])
+ALTER TABLE [dbo].[UsersInRoles]  ADD  CONSTRAINT [fk_UserId] FOREIGN KEY([UserId])
 REFERENCES [dbo].[UserProfile] ([UserId])
 GO
 

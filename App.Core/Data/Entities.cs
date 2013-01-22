@@ -29,9 +29,29 @@ namespace App.Core
             this.Set<OAuthMembership>().Add(oAuthMembership);
         }
 
+        void IDatabaseContext.Add(Membership membership)
+        {
+            this.Set<Membership>().Add(membership);
+        }
+
+        IDbSet<Membership> IDatabaseContext.Memberships 
+        {
+            get { return this.Memberships; } 
+        }
+
         void IDatabaseContext.SaveChanges()
         {
-            this.SaveChanges();
+            try
+            {
+                this.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var err in ex.EntityValidationErrors)
+                {
+                }
+                throw ex;
+            }
         }
     }
 }

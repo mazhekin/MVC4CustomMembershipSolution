@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Registration was successfull";
+}
+
+<h2>Your registration was successfull, but your account is not activated.</h2>
+
+@if (ViewBag.IsSent != null)
+{
+    <p>
+        Email message with instructions has been sent to @ViewBag.email.
+        You will receive this message instantly (or in 5-10 minutes).
+    </p>
+}
+    <p>
+        Please, check your mailbox to activate your account.
+        If the mail message with account activation did not received for a long time,
+        check your Junk folder. Also check email adddress service@somecompany.com is not in black list of your mailbox.
+    </p>
+
+@if (ViewBag.IsSent == null)
+{
+    using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true, "Message has not been sent. Please, correct the errors and try again.")
+        <div>
+            <fieldset>
+                <div class="editor-label">
+                    Код безопасности
+                </div>
+                <!--
+                <div class="editor-field">
+                    <label for="captcha">Введите Html.CaptchaImage(180, 50) ниже</label><br />
+                    Html.TextBox("captcha")
+                    Html.ValidationMessage("captcha")
+                </div>-->
+                <p>
+                    <input type="submit" value="Send message once again" />
+                </p>
+            </fieldset>
+        </div>
+    }
+}

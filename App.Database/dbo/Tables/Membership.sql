@@ -5,7 +5,6 @@
 	[IsConfirmed] [bit] DEFAULT ((0)) NULL,
 	[LastPasswordFailureDate] [datetime] NULL,
 	[PasswordFailuresSinceLastSuccess] [int] DEFAULT ((0)) NOT NULL,
-	[Password] [nvarchar](128) NOT NULL,
 	[PasswordChangedDate] [datetime] NULL,
 	[PasswordSalt] [nvarchar](128) NOT NULL,
 	[PasswordVerificationToken] [nvarchar](128) NULL,

@@ -1,8 +1,12 @@
-﻿using App.Core.Services;
+﻿using App.Core;
+using App.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
+using System.Web.Security;
 using WebMatrix.WebData;
 
 namespace App.Web.Models.Membership
@@ -179,9 +183,30 @@ namespace App.Web.Models.Membership
             throw new NotImplementedException();
         }
 
-        public override string CreateUserAndAccount(string userName, string password, bool requireConfirmation, IDictionary<string, object> values)
+        public override string CreateUserAndAccount(string userName/*email*/, string password, bool requireConfirmation, IDictionary<string, object> values)
         {
-            throw new NotImplementedException();
+            userName = userName.Trim().ToLower();
+
+            var userProfile = this.usersService.GetUserProfile(userName);
+            if (userProfile != null)
+            {
+                throw new MembershipCreateUserException(MembershipCreateStatus.DuplicateEmail);
+            }
+
+            var newUserProfile = new UserProfile { UserName = userName, DisplayName = userName };
+            this.usersService.Save(newUserProfile);
+
+            var membership = new App.Core.Membership 
+            {
+                UserId = newUserProfile.UserId,
+                CreateDate = DateTime.Now,
+                PasswordSalt = CustomMembershipProvider.GetHash(password),
+                IsConfirmed = false,
+                ConfirmationToken = Guid.NewGuid().ToString()
+            };
+            this.usersService.Save(membership);
+
+            return membership.ConfirmationToken;
         }
 
         public override bool DeleteAccount(string userName)
@@ -265,5 +290,17 @@ namespace App.Web.Models.Membership
         }
 
         #endregion ExtendedMembershipProvider
+
+        #region Helpers
+        private const string salt = "HJIO6589";
+        public static string GetHash(string text)
+        {
+            var buffer = Encoding.UTF8.GetBytes(String.Concat(text, salt));
+            var cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
+            string hash = BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
+            return hash;
+        }
+        #endregion Helpers
+
     }
 }

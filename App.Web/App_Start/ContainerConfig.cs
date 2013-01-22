@@ -5,6 +5,7 @@ using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,6 +22,9 @@ namespace App.Web
             container.RegisterType<IDatabaseContext, Entities>();
 
             container.RegisterType<IUsersService, UsersService>();
+
+            container.RegisterType<SmtpClient>(new InjectionConstructor());
+            container.RegisterType<IEmailService, EmailService>();
 
             ControllerBuilder.Current.SetControllerFactory(typeof(UnityControllerFactory));
         }

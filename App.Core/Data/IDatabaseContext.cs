@@ -12,10 +12,15 @@ namespace App.Core
 
         IDbSet<OAuthMembership> OAuthMemberships { get; }
 
+        IDbSet<Membership> Memberships { get; }
+
         void Add(UserProfile userProfile);
 
         void Add(OAuthMembership oAuthMembership);
 
+        void Add(Membership membership);
+
         void SaveChanges();
+
     }
 }

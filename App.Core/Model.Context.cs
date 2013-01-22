@@ -27,5 +27,6 @@ namespace App.Core
     
         public DbSet<OAuthMembership> OAuthMemberships { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
     }
 }

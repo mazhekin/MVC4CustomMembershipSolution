@@ -3,5 +3,6 @@ MVC4CustomMembershipSolution
 
 ASP.NET MVC 4 project with custom implementation membership. Implementation ExtendedMembershipProvider for own database through Entity Framework 5.0.
 
-Email used as username.
+Email is used as username.
 Account must be verified through email and activation link with guid.
+Password is not saved into database, only hash.

@@ -222,7 +222,9 @@
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Account\RegisterConfirmation.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\RegisterSuccess.cshtml" />
   </ItemGroup>

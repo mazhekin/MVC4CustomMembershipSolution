@@ -15,9 +15,10 @@ namespace App.Core.Services
         OAuthMembership GetOAuthMembership(string provider, string providerUserId);
         void SaveOAuthMembership(string provider, string providerUserId, int userId);
 
-        void Save(Membership membership);
+        void Save(Membership membership, bool add);
 
         Membership GetMembership(int userId);
+        Membership GetMembershipByConfirmToken(string token);
     }
 
     public class UsersService : IUsersService
@@ -70,9 +71,17 @@ namespace App.Core.Services
             return this.db.Memberships.FirstOrDefault(x => x.UserId == userId);
         }
 
-        void IUsersService.Save(Membership membership)
+        Membership IUsersService.GetMembershipByConfirmToken(string token)
         {
-            this.db.Add(membership);
+            return this.db.Memberships.FirstOrDefault(x => x.ConfirmationToken.Equals(token.ToLower()));
+        }
+
+        void IUsersService.Save(Membership membership, bool add)
+        {
+            if (add)
+            {
+                this.db.Add(membership);
+            }
             this.db.SaveChanges();
         }
     }

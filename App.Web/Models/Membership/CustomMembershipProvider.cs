@@ -161,7 +161,36 @@ namespace App.Web.Models.Membership
 
         public override bool ValidateUser(string username, string password)
         {
-            throw new NotImplementedException();
+            var userProfile = this.usersService.GetUserProfile(username);
+            if (userProfile == null)
+            {
+                return false;
+            }
+            var membership = this.usersService.GetMembership(userProfile.UserId);
+            if (membership == null)
+            {
+                return false;
+            }
+            if (!membership.IsConfirmed)
+            {
+                return false;
+            }
+            if (membership.PasswordSalt == CustomMembershipProvider.GetHash(password))
+            {
+                return true;
+            }
+            // first once time we can validate through membership ConfirmationToken, 
+            // to be logged in immediately after confirmation
+            if (membership.ConfirmationToken != null)
+            {
+                if (membership.ConfirmationToken == password)
+                {
+                    membership.ConfirmationToken = null;
+                    this.usersService.Save(membership, add: false);
+                    return true;
+                }
+            }
+            return false;
         }
 
         #endregion MembershipProvider
@@ -170,7 +199,18 @@ namespace App.Web.Models.Membership
 
         public override bool ConfirmAccount(string accountConfirmationToken)
         {
-            throw new NotImplementedException();
+            var membership = this.usersService.GetMembershipByConfirmToken(accountConfirmationToken);
+            if (membership == null)
+            {
+                throw new Exception("Activation code is incorrect.");
+            }
+            if (membership.IsConfirmed)
+            {
+                throw new Exception("Your account is already activated.");
+            }
+            membership.IsConfirmed = true;
+            this.usersService.Save(membership, add: false);
+            return true;
         }
 
         public override bool ConfirmAccount(string userName, string accountConfirmationToken)
@@ -202,9 +242,9 @@ namespace App.Web.Models.Membership
                 CreateDate = DateTime.Now,
                 PasswordSalt = CustomMembershipProvider.GetHash(password),
                 IsConfirmed = false,
-                ConfirmationToken = Guid.NewGuid().ToString()
+                ConfirmationToken = Guid.NewGuid().ToString().ToLower()
             };
-            this.usersService.Save(membership);
+            this.usersService.Save(membership, add: true);
 
             return membership.ConfirmationToken;
         }

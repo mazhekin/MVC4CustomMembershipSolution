@@ -2,7 +2,7 @@
 	[UserId] [int] NOT NULL,
 	[CreateDate] [datetime] NULL,
 	[ConfirmationToken] [nvarchar](128) NULL,
-	[IsConfirmed] [bit] DEFAULT ((0)) NULL,
+	[IsConfirmed] [bit] DEFAULT ((0)) NOT NULL,
 	[LastPasswordFailureDate] [datetime] NULL,
 	[PasswordFailuresSinceLastSuccess] [int] DEFAULT ((0)) NOT NULL,
 	[PasswordChangedDate] [datetime] NULL,

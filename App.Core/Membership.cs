@@ -17,7 +17,7 @@ namespace App.Core
         public int UserId { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string ConfirmationToken { get; set; }
-        public Nullable<bool> IsConfirmed { get; set; }
+        public bool IsConfirmed { get; set; }
         public Nullable<System.DateTime> LastPasswordFailureDate { get; set; }
         public int PasswordFailuresSinceLastSuccess { get; set; }
         public Nullable<System.DateTime> PasswordChangedDate { get; set; }

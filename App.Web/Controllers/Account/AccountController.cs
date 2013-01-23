@@ -71,7 +71,6 @@ namespace App.Web.Controllers
 
                     SendActivationMail(model.Email);
 
-                    //WebSecurity.Login(model.Email, model.Password);
                     return RedirectToAction("RegisterSuccess", "Account", new { email = model.Email });
                 }
                 catch (MembershipCreateUserException e)
@@ -118,13 +117,17 @@ namespace App.Web.Controllers
         //
         // GET: /Account/RegisterSuccess
 
+        [AllowAnonymous]
         public ActionResult RegisterSuccess(string email)
         {
             ViewData["email"] = email;
             return View();
         }
 
-        [HttpPost]
+        //
+        // POST: /Account/RegisterSuccess
+
+        [HttpPost, AllowAnonymous]
        // [CaptchaValidation("captcha")]
         public ActionResult RegisterSuccess(string email, string foo/*, bool captchaValid*/)
         {
@@ -145,6 +148,36 @@ namespace App.Web.Controllers
                     ModelState.AddModelError("_FORM", "Error is occured during sending email message. " + ex.Message);
                 }
             }
+            return View();
+        }
+
+        // 
+        // GET:  /Account/RegisterConfirmation
+
+        [AllowAnonymous]
+        public ActionResult RegisterConfirmation(Guid? guid)
+        {
+            if (!guid.HasValue)
+            {
+                ViewBag.Message = "Activation code is incorrect.";
+                return View();
+            }
+
+            try
+            {
+                WebSecurity.ConfirmAccount(guid.Value.ToString());
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+                return View();
+            }
+
+            ViewBag.Message = "Your account is activated.";
+
+            var membership = this.usersService.GetMembershipByConfirmToken(guid.Value.ToString());
+            var userProfile = this.usersService.GetUserProfile(membership.UserId);
+            WebSecurity.Login(userProfile.UserName, membership.ConfirmationToken);
             return View();
         }
 

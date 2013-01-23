@@ -12,7 +12,7 @@
     <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
-    <Property Name="IsConfirmed" Type="bit" />
+    <Property Name="IsConfirmed" Type="bit" Nullable="false" />
     <Property Name="LastPasswordFailureDate" Type="datetime" />
     <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
     <Property Name="PasswordChangedDate" Type="datetime" />

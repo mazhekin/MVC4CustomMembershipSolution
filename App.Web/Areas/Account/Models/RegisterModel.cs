@@ -6,13 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace App.Web.Models
+namespace App.Web.Areas.Account.Models
 {
     public class RegisterModel
     {
         [Required]
         [Display(Name = "Email")]
-        [ValidEmailAddress(ErrorMessage = "Некорректный e-mail.")]
+        [ValidEmailAddress(ErrorMessage = "Incorrect e-mail.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

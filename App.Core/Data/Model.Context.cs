@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace App.Core
+namespace App.Core.Data
 {
     using System;
     using System.Data.Entity;

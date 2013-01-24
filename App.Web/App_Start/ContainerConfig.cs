@@ -1,4 +1,5 @@
 ﻿using App.Core;
+using App.Core.Data;
 using App.Core.Services;
 using App.Web.Models;
 using Microsoft.Practices.Unity;

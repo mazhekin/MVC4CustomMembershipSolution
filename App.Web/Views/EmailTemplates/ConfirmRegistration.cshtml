@@ -1,10 +1,10 @@
-﻿@model App.Core.UserProfile
+﻿@model App.Core.Data.UserProfile
 
 @{ 
-    var membership = (App.Core.Membership)ViewBag.Membership;
+    var membership = (App.Core.Data.Membership)ViewBag.Membership;
     var websiteUrl = System.Web.Configuration.WebConfigurationManager.AppSettings["WebsiteURL"];
     var websiteUrlName = System.Web.Configuration.WebConfigurationManager.AppSettings["WebsiteUrlName"];
-    var activationLink = websiteUrl + Url.Action("RegisterConfirmation", "Account", new { guid = membership.ConfirmationToken }); 
+    var activationLink = websiteUrl + Url.Action("confirmation", "register", new { guid = membership.ConfirmationToken, area = "account" }); 
 }
 
 <p>

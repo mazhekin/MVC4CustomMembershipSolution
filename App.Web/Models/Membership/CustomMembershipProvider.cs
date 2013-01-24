@@ -1,4 +1,5 @@
 ﻿using App.Core;
+using App.Core.Data;
 using App.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -199,7 +200,7 @@ namespace App.Web.Models.Membership
 
         public override bool ConfirmAccount(string accountConfirmationToken)
         {
-            var membership = this.usersService.GetMembershipByConfirmToken(accountConfirmationToken);
+            var membership = this.usersService.GetMembershipByConfirmToken(accountConfirmationToken, withUserProfile: false);
             if (membership == null)
             {
                 throw new Exception("Activation code is incorrect.");
@@ -236,7 +237,7 @@ namespace App.Web.Models.Membership
             var newUserProfile = new UserProfile { UserName = userName, DisplayName = userName };
             this.usersService.Save(newUserProfile);
 
-            var membership = new App.Core.Membership 
+            var membership = new App.Core.Data.Membership 
             {
                 UserId = newUserProfile.UserId,
                 CreateDate = DateTime.Now,

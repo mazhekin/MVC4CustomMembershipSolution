@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 
-namespace App.Core
+namespace App.Core.Data
 {
     public interface IDatabaseContext
     {

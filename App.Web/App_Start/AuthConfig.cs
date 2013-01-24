@@ -20,13 +20,13 @@ namespace App.Web
 
             OAuthWebSecurity.RegisterClient(new TwitterAuthenticationClient(), "Twitter", new Dictionary<string,object>());
         /*    OAuthWebSecurity.RegisterTwitterClient(
-                consumerKey: "***********",
-                consumerSecret: "****************************");
+                consumerKey: "slCCLcgj5V7AYiCvaFa4hQ",
+                consumerSecret: "FYmJOrrHr1dvV2T77uws2tIonF4UqGlOdonfkjLOaU");
          */
 
             OAuthWebSecurity.RegisterFacebookClient(
-                appId: "*****************",
-                appSecret: "****************************");
+                appId: "545356245493022",
+                appSecret: "1db60d6a94ff14a9621948ea38ceef79");
 
             //OAuthWebSecurity.RegisterGoogleClient();
         }

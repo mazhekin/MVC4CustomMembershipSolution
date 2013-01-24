@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace App.Web.Models
+namespace App.Web.Areas.Account.Models
 {
     public class RegisterExternalLoginModel
     {

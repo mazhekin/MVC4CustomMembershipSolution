@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Core.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace App.Core.Services
         void Save(Membership membership, bool add);
 
         Membership GetMembership(int userId);
-        Membership GetMembershipByConfirmToken(string token);
+        Membership GetMembershipByConfirmToken(string token, bool withUserProfile);
     }
 
     public class UsersService : IUsersService
@@ -71,9 +72,14 @@ namespace App.Core.Services
             return this.db.Memberships.FirstOrDefault(x => x.UserId == userId);
         }
 
-        Membership IUsersService.GetMembershipByConfirmToken(string token)
+        Membership IUsersService.GetMembershipByConfirmToken(string token, bool withUserProfile)
         {
-            return this.db.Memberships.FirstOrDefault(x => x.ConfirmationToken.Equals(token.ToLower()));
+            var membership = this.db.Memberships.FirstOrDefault(x => x.ConfirmationToken.Equals(token.ToLower()));
+            if (membership != null && withUserProfile)
+            {
+                membership.UserProfile = this.db.UserProfiles.First(x => x.UserId == membership.UserId);
+            }
+            return membership;
         }
 
         void IUsersService.Save(Membership membership, bool add)

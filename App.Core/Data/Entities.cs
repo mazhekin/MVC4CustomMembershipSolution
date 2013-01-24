@@ -5,7 +5,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 
-namespace App.Core
+namespace App.Core.Data
 {
     public partial class Entities : IDatabaseContext
     {

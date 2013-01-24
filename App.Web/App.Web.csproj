@@ -155,9 +155,15 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\ContainerConfig.cs" />
+    <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
+    <Compile Include="Areas\Account\Controllers\ExternalLoginController.cs" />
+    <Compile Include="Areas\Account\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Account\Controllers\LogoffController.cs" />
+    <Compile Include="Areas\Account\Controllers\RegisterController.cs" />
+    <Compile Include="Areas\Account\Models\LoginModel.cs" />
+    <Compile Include="Areas\Account\Models\RegisterExternalLoginModel.cs" />
+    <Compile Include="Areas\Account\Models\RegisterModel.cs" />
     <Compile Include="Code\DataAnnotations.cs" />
-    <Compile Include="Controllers\Account\AccountController.cs" />
-    <Compile Include="Controllers\Account\AccountController.ExternalLogin.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -165,10 +171,8 @@
     <Compile Include="Models\Membership\CustomMembershipProvider.cs" />
     <Compile Include="Models\Membership\CustomRoleProvider.cs" />
     <Compile Include="Models\Membership\TwitterAuthenticationClient.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\Unity\HttpContextLifetimeManager.cs" />
     <Compile Include="Models\Unity\IUnityContainerAccessor.cs" />
-    <Compile Include="Models\RegisterExternalLoginModel.cs" />
     <Compile Include="Models\Unity\UnityControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -187,31 +191,19 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\Register.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\Login.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Areas\Account\Views\Login\_ExternalLoginsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Core\App.Core.csproj">
       <Project>{e2209b95-dddc-40e4-867b-1b276447202b}</Project>
       <Name>App.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -223,13 +215,31 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Account\RegisterConfirmation.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Account\RegisterSuccess.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\EmailTemplates\ConfirmRegistration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Account\Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\Login\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\Register\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\Register\Success.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\Register\Confirmation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\ExternalLogin\Confirmation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\ExternalLogin\Failure.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

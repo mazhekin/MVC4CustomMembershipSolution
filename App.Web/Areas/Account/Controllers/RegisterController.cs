@@ -1,8 +1,6 @@
-﻿using App.Core;
-using App.Core.Models;
+﻿using App.Core.Models;
 using App.Core.Services;
-using App.Web.Models;
-using Microsoft.Web.WebPages.OAuth;
+using App.Web.Areas.Account.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,46 +10,24 @@ using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 
-namespace App.Web.Controllers
+namespace App.Web.Areas.Account.Controllers
 {
-    [Authorize]
-    public partial class AccountController : Controller
+    public class RegisterController : Controller
     {
         private readonly IUsersService usersService;
         private readonly IEmailService emailService;
 
-        public AccountController(IUsersService usersService, IEmailService emailService)
+        public RegisterController(IUsersService usersService, IEmailService emailService)
         {
             this.usersService = usersService;
             this.emailService = emailService;
         }
 
         //
-        // GET: /Account/Login/
+        // GET: /Account/Register/
 
         [AllowAnonymous]
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-
-        //
-        // POST: /Account/LogOff
-
-        [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            WebSecurity.Logout();
-
-            return RedirectToAction("Index", "Home");
-        }
-
-        //
-        // GET: /Account/Register
-
-        [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Index()
         {
             return View();
         }
@@ -60,7 +36,7 @@ namespace App.Web.Controllers
         // POST: /Account/Register
 
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Index(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +47,7 @@ namespace App.Web.Controllers
 
                     SendActivationMail(model.Email);
 
-                    return RedirectToAction("RegisterSuccess", "Account", new { email = model.Email });
+                    return RedirectToAction("success", "register", new { email = model.Email, area = "account" });
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -83,6 +59,45 @@ namespace App.Web.Controllers
             return View(model);
         }
 
+        //
+        // GET: /Account/Register/Success
+
+        [AllowAnonymous]
+        public ActionResult Success(string email)
+        {
+            ViewData["email"] = email;
+            return View();
+        }
+
+        //
+        // POST: /Account/Register/Success
+
+        [HttpPost, AllowAnonymous]
+        // [CaptchaValidation("captcha")]
+        public ActionResult Success(string email, string foo/*, bool captchaValid*/)
+        {
+            ViewData["email"] = email;
+            // to do: captcha
+            /*if (!captchaValid)
+            {
+                //ModelState.AddModelError("captcha", "Введен неверный код безопасности.");
+            }
+            else*/
+            {
+                try
+                {
+                    SendActivationMail(email);
+                    ViewBag.IsSent = true;
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("_FORM", "Error is occured during sending email message. " + ex.Message);
+                }
+            }
+            return View();
+        }
+
+        // to do: transfer it to service
         private void SendActivationMail(string email)
         {
             var userProfile = this.usersService.GetUserProfile(email);
@@ -114,48 +129,11 @@ namespace App.Web.Controllers
                 );
         }
 
-        //
-        // GET: /Account/RegisterSuccess
-
-        [AllowAnonymous]
-        public ActionResult RegisterSuccess(string email)
-        {
-            ViewData["email"] = email;
-            return View();
-        }
-
-        //
-        // POST: /Account/RegisterSuccess
-
-        [HttpPost, AllowAnonymous]
-       // [CaptchaValidation("captcha")]
-        public ActionResult RegisterSuccess(string email, string foo/*, bool captchaValid*/)
-        {
-            ViewData["email"] = email;
-            /*if (!captchaValid)
-            {
-                //ModelState.AddModelError("captcha", "Введен неверный код безопасности.");
-            }
-            else*/
-            {
-                try
-                {
-                    SendActivationMail(email);
-                    ViewData["IsSent"] = true;
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("_FORM", "Error is occured during sending email message. " + ex.Message);
-                }
-            }
-            return View();
-        }
-
         // 
-        // GET:  /Account/RegisterConfirmation
+        // GET:  /Account/Register/Confirmation
 
         [AllowAnonymous]
-        public ActionResult RegisterConfirmation(Guid? guid)
+        public ActionResult Confirmation(Guid? guid)
         {
             if (!guid.HasValue)
             {
@@ -175,10 +153,10 @@ namespace App.Web.Controllers
 
             ViewBag.Message = "Your account is activated.";
 
-            var membership = this.usersService.GetMembershipByConfirmToken(guid.Value.ToString());
-            var userProfile = this.usersService.GetUserProfile(membership.UserId);
-            WebSecurity.Login(userProfile.UserName, membership.ConfirmationToken);
-            return View();
+            var membership = this.usersService.GetMembershipByConfirmToken(guid.Value.ToString(), withUserProfile: true);
+            WebSecurity.Login(membership.UserProfile.UserName, membership.ConfirmationToken);
+            
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         #region Helpers

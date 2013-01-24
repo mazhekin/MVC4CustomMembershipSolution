@@ -9,7 +9,7 @@
           <EntitySet Name="Membership" EntityType="Model.Store.Membership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OAuthMembership" EntityType="Model.Store.OAuthMembership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProfile" EntityType="Model.Store.UserProfile" store:Type="Tables" Schema="dbo" />
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Membership">
           <Key>
             <PropertyRef Name="UserId" />
@@ -42,7 +42,7 @@
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
         </EntityType>
-      </Schema></edmx:StorageModels>
+        </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -123,7 +123,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

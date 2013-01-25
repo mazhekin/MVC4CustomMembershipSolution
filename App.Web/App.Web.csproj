@@ -168,12 +168,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Membership\CustomMembershipProvider.cs" />
-    <Compile Include="Models\Membership\CustomRoleProvider.cs" />
-    <Compile Include="Models\Membership\TwitterAuthenticationClient.cs" />
-    <Compile Include="Models\Unity\HttpContextLifetimeManager.cs" />
-    <Compile Include="Models\Unity\IUnityContainerAccessor.cs" />
-    <Compile Include="Models\Unity\UnityControllerFactory.cs" />
+    <Compile Include="Code\Membership\CustomMembershipProvider.cs" />
+    <Compile Include="Code\Membership\CustomRoleProvider.cs" />
+    <Compile Include="Code\Membership\TwitterAuthenticationClient.cs" />
+    <Compile Include="Code\Unity\HttpContextLifetimeManager.cs" />
+    <Compile Include="Code\Unity\IUnityContainerAccessor.cs" />
+    <Compile Include="Code\Unity\UnityControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Account\Views\Shared\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Account\Views\Login\Index.cshtml" />

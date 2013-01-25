@@ -1,4 +1,4 @@
-﻿using App.Web.Models.Membership;
+﻿using App.Web.Code.Membership;
 using Microsoft.Web.WebPages.OAuth;
 using System;
 using System.Collections.Generic;

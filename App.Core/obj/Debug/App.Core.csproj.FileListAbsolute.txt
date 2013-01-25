@@ -40,4 +40,3 @@ D:\Tests\MVCStudySolution\App.Core\obj\Debug\App.Core.Resources.Global.resources
 D:\Tests\MVCStudySolution\App.Core\obj\Debug\App.Core.csproj.GenerateResource.Cache
 D:\Tests\MVCStudySolution\App.Core\obj\Debug\App.Core.dll
 D:\Tests\MVCStudySolution\App.Core\obj\Debug\App.Core.pdb
-D:\Tests\MVCStudySolution\App.Core\obj\Debug\App.Core.csprojResolveAssemblyReference.cache

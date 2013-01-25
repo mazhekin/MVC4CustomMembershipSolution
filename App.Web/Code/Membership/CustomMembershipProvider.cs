@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Security;
 using WebMatrix.WebData;
 
-namespace App.Web.Models.Membership
+namespace App.Web.Code.Membership
 {
     public class CustomMembershipProvider : ExtendedMembershipProvider
     {

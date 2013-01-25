@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 
-namespace App.Web.Models.Membership
+namespace App.Web.Code.Membership
 {
     public class CustomRoleProvider : RoleProvider
     {

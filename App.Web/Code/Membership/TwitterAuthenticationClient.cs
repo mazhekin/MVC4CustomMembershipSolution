@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace App.Web.Models.Membership
+namespace App.Web.Code.Membership
 {
     public class TwitterAuthenticationClient : IAuthenticationClient
     {

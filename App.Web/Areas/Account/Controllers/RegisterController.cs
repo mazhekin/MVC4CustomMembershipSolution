@@ -45,7 +45,7 @@ namespace App.Web.Areas.Account.Controllers
                 {
                     var token = WebSecurity.CreateUserAndAccount(model.Email, model.Password, null, requireConfirmationToken: true);
 
-                    SendActivationMail(model.Email);
+                    this.usersService.SendAccountActivationMail(model.Email);
 
                     return RedirectToAction("success", "register", new { email = model.Email, area = "account" });
                 }
@@ -86,7 +86,7 @@ namespace App.Web.Areas.Account.Controllers
             {
                 try
                 {
-                    SendActivationMail(email);
+                    this.usersService.SendAccountActivationMail(email);
                     ViewBag.IsSent = true;
                 }
                 catch (Exception ex)
@@ -95,38 +95,6 @@ namespace App.Web.Areas.Account.Controllers
                 }
             }
             return View();
-        }
-
-        // to do: transfer it to service
-        private void SendActivationMail(string email)
-        {
-            var userProfile = this.usersService.GetUserProfile(email);
-            if (userProfile == null)
-            {
-                throw new MembershipCreateUserException(MembershipCreateStatus.ProviderError);
-            }
-
-            var membership = this.usersService.GetMembership(userProfile.UserId);
-            if (membership == null)
-            {
-                throw new MembershipCreateUserException(MembershipCreateStatus.ProviderError);
-            }
-
-            var websiteUrlName = WebConfigurationManager.AppSettings["WebsiteUrlName"];
-            var viewData = new ViewDataDictionary { Model = userProfile };
-            viewData.Add("Membership", membership);
-            this.emailService.SendEmail(
-                new SendEmailModel
-                {
-                    EmailAddress = email,
-                    Subject = websiteUrlName + ": Confirm your registration",
-                    WebsiteUrlName = websiteUrlName,
-                    WebsiteTitle = WebConfigurationManager.AppSettings["WebsiteTitle"],
-                    WebsiteURL = WebConfigurationManager.AppSettings["WebsiteURL"]
-                },
-                "ConfirmRegistration",
-                viewData
-                );
         }
 
         // 
@@ -140,7 +108,6 @@ namespace App.Web.Areas.Account.Controllers
                 ViewBag.Message = "Activation code is incorrect.";
                 return View();
             }
-
             try
             {
                 WebSecurity.ConfirmAccount(guid.Value.ToString());

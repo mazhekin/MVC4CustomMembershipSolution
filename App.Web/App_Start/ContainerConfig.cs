@@ -27,6 +27,8 @@ namespace App.Web
             container.RegisterType<SmtpClient>(new InjectionConstructor());
             container.RegisterType<IEmailService, EmailService>();
 
+            container.RegisterType<IConfigService, ConfigService>();
+
             ControllerBuilder.Current.SetControllerFactory(typeof(UnityControllerFactory));
         }
     }

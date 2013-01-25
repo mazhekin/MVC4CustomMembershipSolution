@@ -39,6 +39,11 @@ namespace App.Core.Data
             get { return this.Memberships; } 
         }
 
+        IDbSet<Config> IDatabaseContext.Configs
+        {
+            get { return this.Configs; }
+        }
+
         void IDatabaseContext.SaveChanges()
         {
             try

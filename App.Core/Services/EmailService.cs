@@ -104,12 +104,9 @@ namespace App.Core.Services
             }
 
             var viewData = data as ViewDataDictionary ?? new ViewDataDictionary { Model = data };
-            viewData["WebsiteUrl"] = sendEmailModel.WebsiteURL;
-            viewData["WebsiteName"] = sendEmailModel.WebsiteTitle;
-            viewData["WebsiteUrlName"] = sendEmailModel.WebsiteUrlName;
+            viewData["SendEmailModel"] = sendEmailModel;
 
             var tempData = new TempDataDictionary();
-
 
             if (String.IsNullOrWhiteSpace(sendEmailModel.WebsiteURL))
             {

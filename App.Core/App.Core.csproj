@@ -70,6 +70,7 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -101,6 +102,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Config.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Entities.cs" />
     <Compile Include="Data\IDatabaseContext.cs" />
     <Compile Include="Data\Membership.cs">
@@ -133,6 +137,7 @@
       <DependentUpon>Global.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\EmailService.cs" />
+    <Compile Include="Services\ConfigService.cs" />
     <Compile Include="Services\UsersService.cs" />
     <Compile Include="Data\UserProfile.cs">
       <DependentUpon>Model.tt</DependentUpon>

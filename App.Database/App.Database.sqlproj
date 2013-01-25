@@ -66,5 +66,6 @@
     <Build Include="dbo\Tables\Roles.sql" />
     <Build Include="dbo\Tables\UserProfile.sql" />
     <Build Include="dbo\Tables\UsersInRoles.sql" />
+    <Build Include="dbo\Tables\Config.sql" />
   </ItemGroup>
 </Project>

@@ -6,10 +6,18 @@
     <edmx:StorageModels>
     <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Config" EntityType="Model.Store.Config" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Membership" EntityType="Model.Store.Membership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OAuthMembership" EntityType="Model.Store.OAuthMembership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProfile" EntityType="Model.Store.UserProfile" store:Type="Tables" Schema="dbo" />
-          </EntityContainer>
+        </EntityContainer>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="250" />
+        </EntityType>
         <EntityType Name="Membership">
           <Key>
             <PropertyRef Name="UserId" />
@@ -42,7 +50,7 @@
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
         </EntityType>
-        </Schema></edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -50,6 +58,7 @@
           <EntitySet Name="OAuthMemberships" EntityType="Model.OAuthMembership" />
           <EntitySet Name="UserProfiles" EntityType="Model.UserProfile" />
           <EntitySet Name="Memberships" EntityType="Model.Membership" />
+          <EntitySet Name="Configs" EntityType="Model.Config" />
         </EntityContainer>
         <EntityType Name="OAuthMembership">
           <Key>
@@ -82,6 +91,13 @@
           <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="PasswordVerificationToken" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="PasswordVerificationTokenExpirationDate" Precision="3" />
+        </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Type="String" Name="Key" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -120,6 +136,14 @@
                 <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configs">
+            <EntityTypeMapping TypeName="Model.Config">
+              <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

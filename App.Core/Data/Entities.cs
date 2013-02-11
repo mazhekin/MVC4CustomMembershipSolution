@@ -58,5 +58,11 @@ namespace App.Core.Data
                 throw ex;
             }
         }
+
+        IDbSet<Role> IDatabaseContext.Roles 
+        {
+            get { return this.Roles; } 
+        }
+
     }
 }

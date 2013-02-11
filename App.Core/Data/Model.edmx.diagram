@@ -6,9 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d06fe386de6142e29e6f75878b85e074" Name="Diagram1" ZoomLevel="85" >
         <EntityTypeShape EntityType="Model.OAuthMembership" Width="1.5" PointX="3" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="3" PointY="2.5" />
         <EntityTypeShape EntityType="Model.Membership" Width="1.5" PointX="1" PointY="0.5" />
         <EntityTypeShape EntityType="Model.Config" Width="1.5" PointX="5.125" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="5.25" PointY="3" />
+        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="8.625" PointY="3" />
+        <AssociationConnector Association="Model.UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -16,6 +16,8 @@ namespace App.Core.Data
 
         IDbSet<Config> Configs { get; }
 
+        IDbSet<Role> Roles { get; }
+
         void Add(UserProfile userProfile);
 
         void Add(OAuthMembership oAuthMembership);

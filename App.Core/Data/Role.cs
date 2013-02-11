@@ -12,17 +12,16 @@ namespace App.Core.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class UserProfile
+    public partial class Role
     {
-        public UserProfile()
+        public Role()
         {
-            this.Roles = new HashSet<Role>();
+            this.UserProfiles = new HashSet<UserProfile>();
         }
     
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string DisplayName { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
     
-        public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<UserProfile> UserProfiles { get; set; }
     }
 }

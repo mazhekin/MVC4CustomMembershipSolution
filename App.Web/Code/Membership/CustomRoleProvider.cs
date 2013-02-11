@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,13 @@ namespace App.Web.Code.Membership
 {
     public class CustomRoleProvider : RoleProvider
     {
+        private readonly IUsersService usersService;
+
+        public CustomRoleProvider()
+        {
+            this.usersService = (IUsersService)MvcApplication.Container.Resolve(typeof(IUsersService), null);
+        }
+
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
             throw new NotImplementedException();
@@ -47,7 +55,7 @@ namespace App.Web.Code.Membership
 
         public override string[] GetRolesForUser(string username)
         {
-            throw new NotImplementedException();
+            return this.usersService.GetRoles(username);
         }
 
         public override string[] GetUsersInRole(string roleName)

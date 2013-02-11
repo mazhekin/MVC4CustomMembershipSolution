@@ -12,19 +12,24 @@ namespace App.Core.Services
 {
     public interface IUsersService
     {
+        // UserProfiles 
         UserProfile GetUserProfile(string userName);
         UserProfile GetUserProfile(int userId);
         void Save(UserProfile userProfile);
 
+        // OAuth Membership
         OAuthMembership GetOAuthMembership(string provider, string providerUserId);
         void SaveOAuthMembership(string provider, string providerUserId, int userId);
 
+        // Membership
         void Save(App.Core.Data.Membership membership, bool add);
-
         App.Core.Data.Membership GetMembership(int userId);
         App.Core.Data.Membership GetMembershipByConfirmToken(string token, bool withUserProfile);
 
         void SendAccountActivationMail(string email);
+
+        // Roles
+        string[] GetRoles(string userName);
     }
 
     public class UsersService : IUsersService
@@ -129,7 +134,17 @@ namespace App.Core.Services
                 },
                 "ConfirmRegistration",
                 viewData
-                );
+            );
+        }
+
+        string[] IUsersService.GetRoles(string userName)
+        {
+            var userProfile = this.db.UserProfiles.FirstOrDefault(x => x.UserName.Equals(userName));
+            if (userProfile != null)
+            {
+                return userProfile.Roles.Select(x => x.RoleName).ToArray();
+            }
+            return new string[] { };
         }
 
     }

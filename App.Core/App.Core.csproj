@@ -125,6 +125,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Role.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserProfile.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Membership.cs" />
     <Compile Include="Models\SendEmailModel.cs" />
     <Compile Include="Data\OAuthMembership.cs">
@@ -139,9 +145,6 @@
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\ConfigService.cs" />
     <Compile Include="Services\UsersService.cs" />
-    <Compile Include="Data\UserProfile.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

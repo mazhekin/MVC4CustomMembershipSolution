@@ -176,7 +176,7 @@ namespace App.Web.Code.Membership
             {
                 return false;
             }
-            if (membership.PasswordSalt == CustomMembershipProvider.GetHash(password))
+            if (membership.PasswordSalt == this.usersService.GetHash(password))
             {
                 return true;
             }
@@ -241,7 +241,7 @@ namespace App.Web.Code.Membership
             {
                 UserId = newUserProfile.UserId,
                 CreateDate = DateTime.Now,
-                PasswordSalt = CustomMembershipProvider.GetHash(password),
+                PasswordSalt = this.usersService.GetHash(password),
                 IsConfirmed = false,
                 ConfirmationToken = Guid.NewGuid().ToString().ToLower()
             };
@@ -332,7 +332,7 @@ namespace App.Web.Code.Membership
 
         #endregion ExtendedMembershipProvider
 
-        #region Helpers
+        /*#region Helpers
         private const string salt = "HJIO6589";
         public static string GetHash(string text)
         {
@@ -341,7 +341,7 @@ namespace App.Web.Code.Membership
             string hash = BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
             return hash;
         }
-        #endregion Helpers
+        #endregion Helpers*/
 
     }
 }

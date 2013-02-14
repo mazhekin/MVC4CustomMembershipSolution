@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Change Password";
+}
+
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        If you forgot your password, enter your email in the form below. The link to change your password
+        will be sent to email.
+    </p>
+
+    @using (Html.BeginForm())
+    {
+    <div>
+        <fieldset>
+            <legend>Enter email:</legend>
+
+            <div class="editor-label">
+                E-mail:
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("Email")
+                @Html.ValidationMessage("Email")
+            </div>
+
+            <p>
+                <input type="submit" value="Send message" />
+            </p>
+
+        </fieldset>
+    </div>
+    }

@@ -156,9 +156,11 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
+    <Compile Include="Areas\Account\Controllers\ChangePasswordController.cs" />
     <Compile Include="Areas\Account\Controllers\ExternalLoginController.cs" />
     <Compile Include="Areas\Account\Controllers\LoginController.cs" />
     <Compile Include="Areas\Account\Controllers\LogoffController.cs" />
+    <Compile Include="Areas\Account\Controllers\ForgotPasswordController.cs" />
     <Compile Include="Areas\Account\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Account\Models\LoginModel.cs" />
     <Compile Include="Areas\Account\Models\RegisterExternalLoginModel.cs" />
@@ -248,13 +250,33 @@
     <Content Include="Areas\Account\Views\ExternalLogin\Failure.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Shared\_Toolbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EmailTemplates\ChangePassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\ForgotPassword\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\ForgotPassword\Sent.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\ChangePassword\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\ChangePassword\BadLink.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Account\Views\ChangePassword\Success.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -270,9 +292,9 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>5490</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:37296/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

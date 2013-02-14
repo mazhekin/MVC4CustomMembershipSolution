@@ -3,6 +3,7 @@ using App.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Transactions;
 using System.Web.Mvc;
@@ -25,11 +26,18 @@ namespace App.Core.Services
         void Save(App.Core.Data.Membership membership, bool add);
         App.Core.Data.Membership GetMembership(int userId);
         App.Core.Data.Membership GetMembershipByConfirmToken(string token, bool withUserProfile);
+        App.Core.Data.Membership GetMembershipByVerificationToken(string token, bool withUserProfile);
+        void ChangePassword(Data.Membership membership, string newPassword);
 
+        // Emails
         void SendAccountActivationMail(string email);
+        void SentChangePasswordEmail(string email);
 
         // Roles
         string[] GetRoles(string userName);
+
+        // Helper to do 
+        string GetHash(string text);
     }
 
     public class UsersService : IUsersService
@@ -96,6 +104,16 @@ namespace App.Core.Services
             return membership;
         }
 
+        App.Core.Data.Membership IUsersService.GetMembershipByVerificationToken(string token, bool withUserProfile)
+        {
+            var membership = this.db.Memberships.FirstOrDefault(x => x.PasswordVerificationToken.Equals(token.ToLower()));
+            if (membership != null && withUserProfile)
+            {
+                membership.UserProfile = this.db.UserProfiles.First(x => x.UserId == membership.UserId);
+            }
+            return membership;
+        }
+
         void IUsersService.Save(App.Core.Data.Membership membership, bool add)
         {
             if (add)
@@ -145,6 +163,62 @@ namespace App.Core.Services
                 return userProfile.Roles.Select(x => x.RoleName).ToArray();
             }
             return new string[] { };
+        }
+
+        void IUsersService.SentChangePasswordEmail(string email)
+        {
+            var userProfile = (this as IUsersService).GetUserProfile(email);
+            if (userProfile == null)
+            {
+                throw new MembershipCreateUserException("User not found.");
+            }
+
+            var membership = (this as IUsersService).GetMembership(userProfile.UserId);
+            if (membership == null)
+            {
+                throw new MembershipCreateUserException("User not found.");
+            }
+
+            membership.PasswordVerificationToken = Guid.NewGuid().ToString();
+            this.db.SaveChanges();
+
+            var configValues = this.configService.GetValues(new ConfigName[] { ConfigName.WebsiteUrlName, ConfigName.WebsiteTitle, ConfigName.WebsiteUrl });
+            var viewData = new ViewDataDictionary { Model = membership };
+            emailService.SendEmail(
+                new SendEmailModel
+                {
+                    EmailAddress = email,
+                    Subject = configValues[ConfigName.WebsiteUrlName.ToString()] + ": Change password.",
+                    WebsiteUrlName =  configValues[ConfigName.WebsiteUrlName.ToString()],
+                    WebsiteTitle = configValues[ConfigName.WebsiteTitle.ToString()],
+                    WebsiteURL = configValues[ConfigName.WebsiteUrl.ToString()]
+                },
+                "ChangePassword", 
+                viewData
+            );
+        }
+
+        private string salt = "HJIO6589";
+        string IUsersService.GetHash(string text)
+        {
+            var buffer = Encoding.UTF8.GetBytes(String.Concat(text, salt));
+            var cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
+            string hash = BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
+            return hash;
+        }
+
+
+        void IUsersService.ChangePassword(Data.Membership membership, string newPassword)
+        {
+            if (membership == null)
+            {
+                throw new Exception("User not found.");
+            }
+
+            membership.PasswordVerificationToken = null;
+            membership.PasswordSalt = (this as IUsersService).GetHash(newPassword);
+
+            this.db.SaveChanges();
         }
 
     }

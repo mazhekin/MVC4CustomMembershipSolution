@@ -6,6 +6,7 @@ ASP.NET MVC 4 project with custom implementation membership. Implementation Exte
 Email is used as username.
 Account must be verified through email and activation link with guid.
 Password is not saved into database, only hash.
+Password recovery
 
 OAuth:
 login through Facebook account

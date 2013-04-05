@@ -8,7 +8,8 @@
     <h2>Associate your @ViewBag.ProviderDisplayName account.</h2>
 </hgroup>
 
-@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl })) {
+@using (Html.BeginForm("Confirmation", "ExternalLogin", new { ReturnUrl = ViewBag.ReturnUrl, area = "Account" }))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
